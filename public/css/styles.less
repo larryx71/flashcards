@@ -37,20 +37,23 @@ body {
 
 #content {
   display: block;
-  margin: 70px auto;
-  width: 600px;
+  margin: 20px auto;
+  width: 100%;
+  padding:0 20px;
+  overflow:auto;
+}
+
+#content:after {
+  content:'';
+  width:0;
+  height:0;
+  display:block;
+  clear:both;
 }
 
 .cardContainer {
-  position:relative;
-}
-
-.cardContainer:after {
-  content:'';
-  display:block;
-  width:0;
-  height:0;
-  clear:both;
+  float:left;
+  margin:0 10px 10px 0;
 }
 
 .question {
@@ -62,8 +65,8 @@ body {
   font-size: 15px;
   font-weight: 400;
   min-height: 140px;
-  position:absolute;
-  width:600px;
+  width:300px;
+  position:relative;
 }
 
 .answer {
@@ -174,7 +177,7 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2daddc', endColorstr='#0271bf',GradientType=0 ); /* IE6-9 */
 }
 
-.button:hover {
+.button.dark:hover {
   background: #555; /* Old browsers */
   background: -moz-linear-gradient(top,  #555 1%, #444 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#555), color-stop(100%,#444)); /* Chrome,Safari4+ */
