@@ -5,15 +5,33 @@ App.views.ListView = Backbone.View.extend({
 
     },
 
+    initialize : function() {
+
+    },
+
     render : function() {
-        var self = this;
-
-        this.collection.each(function(card) {
-            var cardView = new App.views.CardView({model:card});
-            self.$el.append(cardView.render().$el);
-        })
-
+        this.clear();
+        this.destroyMasonry();
         this.initMasonry();
+
+        this.updateUI();
+
+        return this;
+    },
+
+    updateUI : function() {
+        var self = this;
+        this.collection.each(function(card) {
+            if(card.get('visible')) {
+                var cardView = new App.views.CardView({model:card});
+                var $cardEl = cardView.render().$el;
+                self.$el.append($cardEl).masonry('appended', $cardEl);
+            }
+        })
+    },
+
+    destroyMasonry : function() {
+        this.$el.masonry( 'destroy' );
     },
 
     initMasonry : function() {
@@ -22,5 +40,9 @@ App.views.ListView = Backbone.View.extend({
             columnWidth: 320,
             isAnimated: true
         });
+    },
+
+    clear : function() {
+        this.$el.empty();
     }
 });

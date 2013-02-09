@@ -8,10 +8,17 @@ App.views.CardView = Backbone.View.extend({
 
     },
 
+    initialize : function() {
+        this.model.on('change:visible', this.updateDisplay, this);
+    },
+
     render : function() {
-        console.log('question = ' + this.model.get('question'));
         this.$el.html(this.questionTmpl({question : this.model.get('question')}));
 
         return this;
+    },
+
+    updateDisplay : function() {
+
     }
 });

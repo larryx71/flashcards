@@ -3,12 +3,20 @@
 <head>
     <link rel="stylesheet/less" type="text/css" href="/css/styles.less" />
     <script src='/js/thirdparty/less-1.3.3.min.js'></script>
+    <link rel="stylesheet" href="/css/chosen.css"></link>
     <link rel="stylesheet" href="/css/font-awesome.min.css" />
 </head>
 <body>
     <div id="main">
         <div id="header">
             Home
+            <div class="filterContainer">
+                <select id="filter" data-placeholder="Filter by technology" class="chzn-select" style="width:180px;">
+                    <option value=""></option>
+                    <option value="javascript">javascript</option>
+                    <option value="coffeescript">coffeescript</option>
+                </select>
+            </div>
         </div>
         <!-- hardcoded ui for now, soon to be moved to backbone view -->
         <div id="content">
@@ -38,6 +46,7 @@
         };
     </script>
     <script src="/js/thirdparty/jquery-1.9.0.min.js"></script>
+    <script src="/js/thirdparty/chosen.jquery.min.js"></script>
     <script src="/js/thirdparty/jquery.masonry.min.js"></script>
     <script src="/js/thirdparty/underscore-min.js"></script>
     <script>
