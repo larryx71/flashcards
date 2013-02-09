@@ -1,7 +1,4 @@
 $(function() {
-    $('#content').masonry({
-        itemSelector: '.cardContainer',
-        columnWidth: 320,
-        isAnimated: true
-    });
+    var appView = new App.views.AppView();
+    appView.render();
 });

@@ -1,4 +1,4 @@
-App.Card = Backbone.Model.extend({
+App.models.Card = Backbone.Model.extend({
     defaults : {
         type : '',
         question : '',
