@@ -10,22 +10,7 @@ App.views.AppView = Backbone.View.extend({
 
         this.cardCollection = null;
         this.listView = null;
-
-        // setup special listener for the filter
-        $('#filter').chosen().change(function(e) {
-            var selectedFilter = $('#filter').find(':selected').val();
-            self.cardCollection.each(function(card) {
-                if(card.get('type') === selectedFilter) {
-                    console.log('found question ' + card.get('question'));
-                    card.set('visible', true);
-                }
-                else {
-                    card.set('visible', false);
-                }
-            });
-
-            self.listView.render();
-        });
+        this.filterView = null;
     },
 
     render : function() {
@@ -56,5 +41,8 @@ App.views.AppView = Backbone.View.extend({
         this.cardCollection = new App.collections.CardsCollection([c1, c2, c3, c4, c5, c6]);
         this.listView = new App.views.ListView({collection : this.cardCollection});
         this.listView.render();
+
+        this.filterView = new App.views.FilterView();
+        this.filterView.render();
     }
 });

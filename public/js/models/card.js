@@ -3,7 +3,6 @@ App.models.Card = Backbone.Model.extend({
         type : '',
         question : '',
         answer : '',
-        note : '',
-        visible : true
+        note : ''
     }
 });

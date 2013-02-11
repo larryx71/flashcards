@@ -6,15 +6,13 @@ App.views.ListView = Backbone.View.extend({
     },
 
     initialize : function() {
-
+        App.pubsub.subscribe(App.events.ON_FILTER_SELECTED, this.onFilterSelected, this);
     },
 
     render : function() {
-        this.clear();
-        this.destroyMasonry();
-        this.initMasonry();
-
-        this.updateUI();
+        this.clear()
+            .updateUI()
+            .initIsotope();
 
         return this;
     },
@@ -22,27 +20,37 @@ App.views.ListView = Backbone.View.extend({
     updateUI : function() {
         var self = this;
         this.collection.each(function(card) {
-            if(card.get('visible')) {
-                var cardView = new App.views.CardView({model:card});
-                var $cardEl = cardView.render().$el;
-                self.$el.append($cardEl).masonry('appended', $cardEl);
-            }
+            var cardView = new App.views.CardView({model:card});
+            var $cardEl = cardView.render().$el;
+            self.$el.append($cardEl);
         })
+
+        return this;
     },
 
-    destroyMasonry : function() {
-        this.$el.masonry( 'destroy' );
+    filter : function(type) {
+        this.$el.isotope({ filter: '.' + type });
+
+        return this;
     },
 
-    initMasonry : function() {
-        this.$el.masonry({
-            itemSelector: '.cardContainer',
-            columnWidth: 320,
-            isAnimated: true
+    initIsotope : function() {
+        this.$el.isotope({
+            // options
+            itemSelector : '.cardContainer',
+            layoutMode : 'masonry'
         });
+
+        return this;
     },
 
     clear : function() {
         this.$el.empty();
+
+        return this;
+    },
+
+    onFilterSelected : function(selectedFilter) {
+        this.filter(selectedFilter);
     }
 });
