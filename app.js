@@ -11,26 +11,25 @@ var express = require('express'),
 // Set EJS as template engine
 app.set('view engine', 'ejs');
 
-app.configure(function() {
-    app.use(express.bodyParser());
-    app.use(express.static('public'));
-    app.use(app.router);
-});
-
 dbHelper.connect(database.HOST, database.PORT, database.DB_NAME)
     .done(onConnectSuccessful)
     .fail(onConnectFail);
-
-// Catches every 404
-app.use(function(req, res, next) {
-    res.send(404, 'Oops, requested page does not exist');
-});
 
 app.listen(NODE_PORT);
 console.log('Node server started, listening on ' + NODE_PORT);
 
 function onConnectSuccessful(db) {
     console.log('connection successful');
+
+    app.get('/', function(req, res) {
+        res.render('index', {});
+    });
+
+    app.configure(function() {
+        app.use(express.bodyParser());
+        app.use(express.static('public'));
+        app.use(app.router);
+    });
 
     app.get('/list/:id', function(req, res) {
         dbHelper.getList(db, req.params.id)
@@ -42,6 +41,11 @@ function onConnectSuccessful(db) {
             .fail(function(err) {
                 res.send(err);
             });
+    });
+
+    // Catches every 404
+    app.use(function(req, res, next) {
+        res.send(404, 'Oops, requested page does not exist');
     });
 }
 
