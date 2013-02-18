@@ -1,8 +1,13 @@
 App.views.IntroDialogView = Backbone.View.extend({
     el : '#dialog_bg',
 
+    events : {
+        'click .big_button' : 'onContinue',
+        'click .close' : 'onClose'
+    },
+
     render : function() {
-        var $dialog = this.$('#dialog');
+        var $dialog = this.$('#dialog').empty();
         var types = JSON.parse($('#types').val());
         var $types = $('<select />', {
             id : 'interested_types',
@@ -27,6 +32,10 @@ App.views.IntroDialogView = Backbone.View.extend({
                 'right' : 20,
                 'bottom' : 20
             })
+        ).append(
+            $('<div />', {
+                'class' : 'close'
+            }).text('✕')
         );
 
         $types.chosen();
@@ -42,5 +51,17 @@ App.views.IntroDialogView = Backbone.View.extend({
 
     hide : function() {
         this.$el.hide();
+    },
+
+    onContinue : function() {
+        var seedTypeArray = $('#interested_types').val() || [];
+        var seedTypes = seedTypeArray.join(',');
+
+        $('#seedTypes').val(seedTypes);
+        $('#main_form').submit();
+    },
+
+    onClose : function() {
+        this.hide();
     }
 });

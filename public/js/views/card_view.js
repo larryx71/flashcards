@@ -5,7 +5,7 @@ App.views.CardView = Backbone.View.extend({
     questionTmpl :_.template($('#question-template').html()),
 
     events : {
-
+        'click .cornerButton' : 'onSeeAnswer'
     },
 
     initialize : function() {
@@ -13,8 +13,14 @@ App.views.CardView = Backbone.View.extend({
 
     render : function() {
         this.$el.html(this.questionTmpl({question : this.model.get('question')}));
-        this.$el.addClass('all ' + this.model.get('type'));
+        this.$el.addClass('all ' + this.model.get('types').join(' '));
+        this.$el.data('answer', this.model.get('answer'));
 
         return this;
+    },
+
+    onSeeAnswer : function() {
+        var answerDialogView = new App.views.AnswerDialogView({model : this.model});
+        answerDialogView.render().show();
     }
 });

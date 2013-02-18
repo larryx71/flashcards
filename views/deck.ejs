@@ -17,6 +17,11 @@
         <div id="content">
         </div>
         <input id='list' type="hidden" value="<%= JSON.stringify(list) %>" />
+        <input type="hidden" id="types" value='["","javascript","coffeescript", "css", "typescript"]'></input>
+    </div>
+    <div id="dialog_bg">
+        <div id="dialog" class="card">
+        </div>
     </div>
     <script type="text/template" id="question-template">
         <div class="question">
@@ -28,6 +33,15 @@
                 See Answer
             </div>
         </div>
+    </script>
+    <script type="text/template" id="card-dialog-template">
+        <div class="q">
+            {{ question }}
+        </div>
+        <div class="a">
+            {{ answer }}
+        </div>
+        <div class="close">✕</div>
     </script>
     <script>
         var viewState = 'personal';
@@ -58,6 +72,7 @@
     <script src="/js/views/card_view.js"></script>
     <script src="/js/views/filter_view.js"></script>
     <script src="/js/views/list_view.js"></script>
+    <script src="/js/views/answer_dialog_view.js"></script>
     <script src="/js/start.js"></script>
 </body>
 </html>

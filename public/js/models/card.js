@@ -1,8 +1,8 @@
 App.models.Card = Backbone.Model.extend({
     defaults : {
-        type : '',
+        types : [],
         question : '',
         answer : '',
-        note : ''
+        owner : ''
     }
 });
