@@ -13,13 +13,7 @@ App.views.IntroView = Backbone.View.extend({
 
     onStart : function() {
         // Show pop up dialog
-        var $dialogContainer = $('#dialog_bg');
-        var $dialog = $('#dialog');
-
-        $dialog.append(
-            $('<p />').text('What technologies are you interested in?')
-        );
-
-        $dialogContainer.show();
+        var introDialogView = new App.views.IntroDialogView();
+        introDialogView.render().show();
     }
 });

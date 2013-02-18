@@ -2,7 +2,7 @@ App.views.FilterView = Backbone.View.extend({
     el : '#filterContainer',
 
     render : function() {
-        var filterTypes = ['', 'all', 'coffeescript', 'javascript'];
+        var filterTypes = JSON.parse($('#types').val());
         var $select = $('<select />', {
             id : 'filter',
             'class' : 'chzn-select',
