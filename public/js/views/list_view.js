@@ -23,6 +23,14 @@ App.views.ListView = Backbone.View.extend({
             var cardView = new App.views.CardView({model:card});
             var $cardEl = cardView.render().$el;
             self.$el.append($cardEl);
+            console.log($cardEl.find('.question').height());
+
+            // Dynamically determine the width and height of the card container,
+            // as well as the answer div, we need to do this for the flip animation
+            var $question = $cardEl.find('.question');
+            $cardEl.width(($question.width() + 20) + 'px');
+            $cardEl.height(($question.height() + 20) + 'px');
+            $cardEl.find('.answer').height($question.height());
         })
 
         return this;
