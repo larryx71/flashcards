@@ -15,7 +15,85 @@ var apis = {
             console.log('connected to db');
 
             err ? deferred.reject(err) : deferred.resolve(db);
-        })
+        });
+
+        var collection = db.createCollection('testing', function(err, collection) {
+            console.log('testing collection created')
+        });
+
+        return deferred;
+    },
+
+    getCard : function(db, id) {
+
+        var query = {
+            _id : Number(id)
+        };
+
+        collection.findOne(query);
+    },
+
+    createCard : function(db, card) {
+        var deferred = Deferred();
+
+        collection.insert(card, {safe:true},
+            function(err, records) {
+                if(!err) { deferred.resolve('Card created');}
+                else {
+                    console.warn(err.message);
+                    deferred.reject('Error creating card');
+
+                    if (err && err.message.indexOf('E11000 ') !== -1) {
+                        // this _id was already inserted in the database
+                    }
+                }
+            });
+
+        return deferred;
+    },
+
+    updateCard : function(db, id, card) {
+        var deferred = Deferred();
+
+        var query = {
+            _id : Number(id)
+        };
+
+        collection.update(query, card, {safe:true},
+            function(err, records) {
+                if(!err) { deferred.resolve('Card updated');}
+                else {
+                    console.warn(err.message);
+                    deferred.reject('Error updating card');
+
+                    if (err && err.message.indexOf('E11000 ') !== -1) {
+                        // this _id was already inserted in the database
+                    }
+                }
+            });
+
+        return deferred;
+    },
+
+    deleteCard : function(db, id, card) {
+        var deferred = Deferred();
+
+        var query = {
+            _id : Number(id)
+        };
+
+        collection.remove(query, card, {safe:true},
+            function(err, records) {
+                if(!err) { deferred.resolve('Card deleted');}
+                else {
+                    console.warn(err.message);
+                    deferred.reject('Cannot delete card');
+
+                    if (err && err.message.indexOf('E11000 ') !== -1) {
+                        // this _id was already inserted in the database
+                    }
+                }
+            });
 
         return deferred;
     },
