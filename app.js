@@ -32,7 +32,7 @@ console.log('Node server started, listening on ' + NODE_PORT);
 function onConnectSuccessful(db) {
     console.log('connection successful');
 
-    app.get('/list/:id', function(req, res) {
+    app.get('/deck/:id', function(req, res) {
         dbHelper.getList(db, req.params.id)
             .done(function(list) {
                 res.render('list', {
@@ -42,6 +42,57 @@ function onConnectSuccessful(db) {
             .fail(function(err) {
                 res.send(err);
             });
+    });
+
+    app.get('/card/:id', function(req, res) {
+        dbHelper.getList(db, req.params.id)
+            .done(function(list) {
+                res.render('list', {
+                    list : list
+                });
+            })
+            .fail(function(err) {
+                res.send(err);
+            });
+    });
+
+    app.post('/card', function(req,res) {
+        var card = new Flashcard();
+        card.set('userid', req.params.userid);
+        card.set('question', req.params.question);
+        card.set('answer', req.params.answer);
+        card.set('viewState', 'public');
+        card.set('tags', '');
+        //var card = {'userid': 'cting', 'question':'what is 1+1?', 'answer':'2', 'tags':['math'],'viewState': 'public'};
+        dbHelper.createCard(db, card);
+           // .done(console.log('New card created.'))
+           // .fail(console.log('Failed to create new card'));
+    });
+
+    app.put('/card/:id', function(req,res) {
+        var card = new Flashcard();
+        card.set('userid', req.params.userid);
+        card.set('question', req.params.question);
+        card.set('answer', req.params.answer);
+        card.set('viewState', 'public');
+        card.set('tags', '');
+        //var card = {'userid': 'cting', 'question':'what is 1+1?', 'answer':'2', 'tags':['math'],'viewState': 'public'};
+        dbHelper.updateCard(db, card);
+        // .done(console.log('New card created.'))
+        // .fail(console.log('Failed to create new card'));
+    });
+
+    app.delete('/card/:id', function(req,res) {
+        var card = new Flashcard();
+        card.set('userid', req.params.userid);
+        card.set('question', req.params.question);
+        card.set('answer', req.params.answer);
+        card.set('viewState', 'public');
+        card.set('tags', '');
+        //var card = {'userid': 'cting', 'question':'what is 1+1?', 'answer':'2', 'tags':['math'],'viewState': 'public'};
+        dbHelper.updateCard(db, card);
+        // .done(console.log('New card created.'))
+        // .fail(console.log('Failed to create new card'));
     });
 }
 
