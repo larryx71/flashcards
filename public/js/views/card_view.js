@@ -5,8 +5,8 @@ App.views.CardView = Backbone.View.extend({
     questionTmpl :_.template($('#question-template').html()),
 
     events : {
-        'click .cornerButton' : 'onSeeAnswer',
-        'click .close' : 'onDelete'
+        'click [data-type=view]' : 'onSeeAnswer',
+        'click [data-type=delete]' : 'onDelete'
     },
 
     initialize : function() {
@@ -26,6 +26,6 @@ App.views.CardView = Backbone.View.extend({
     },
 
     onDelete : function() {
-
+        console.log('delete');
     }
 });

@@ -38,15 +38,29 @@
     </div>
 </script>
 <script type="text/template" id="question-template">
-    <div class="question">
-        <i class="icon-question-sign icon"></i>
-        <div class="text">
-            {{ question }}
+    <div class="flipper">
+        <div class="question">
+            <i class="icon-question-sign icon"></i>
+            <div class="text">
+                {{ question }}
+            </div>
         </div>
-        <div class="cornerButton">
-            See Answer
+        <div class="answer">
+            <div class="answerInner">
+                <div class="title">What would you like to do?</div>
+                <div class="choice" data-type="view">View</div>
+            </div>
         </div>
     </div>
+</script>
+<script type="text/template" id="card-dialog-template">
+    <div class="q">
+        {{ question }}
+    </div>
+    <div class="a">
+        {{ answer }}
+    </div>
+    <div class="close">✕</div>
 </script>
 <script>
     var viewState = 'home';
@@ -78,6 +92,7 @@
 <script src="/js/views/filter_view.js"></script>
 <script src="/js/views/list_view.js"></script>
 <script src="/js/views/home_view.js"></script>
+<script src="/js/views/answer_dialog_view.js"></script>
 <script src="/js/views/intro_view.js"></script>
 <script src="/js/views/intro_dialog_view.js"></script>
 <script src="/js/start.js"></script>

@@ -203,7 +203,7 @@ body {
 }
 
 .answer {
-  background-color: #FFFFFF;
+  background-color: #2AA4CF;
   border: 1px solid #E5E5E5;
   box-shadow: 0 1px 4px #DDDDDD;
   color: #666666;
@@ -223,6 +223,34 @@ body {
   -moz-transform: rotateY(180deg) translate(-20px, 0px);
   -webkit-transform: rotateY(180deg) translate(-20px, 0px);
   transform: rotateY(180deg) translate(-20px, 0px);
+}
+
+.answerInner {
+  width:calc(~"100% - 20px");
+  height:calc(~"100% - 20px");
+  padding:10px;
+  text-align:center;
+  color:#fff;
+}
+
+.answerInner .title {
+  font-size:16px;
+  margin-top:15px;
+}
+
+.answerInner .choice {
+  display:inline-block;
+  cursor:pointer;
+  background-color: #0089B7;
+  border: 1px solid #005FA8;
+  padding:6px 8px;
+  font-size:14px;
+  margin:10px 8px;
+  color:#fff;
+}
+
+.answerInner .choice:hover {
+  background-color:#111;
 }
 
 .question .icon {
@@ -313,22 +341,6 @@ body {
   background: -ms-linear-gradient(top,  #555 1%,#444 100%); /* IE10+ */
   background: linear-gradient(to bottom,  #555 1%,#444 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#555', endColorstr='#444',GradientType=0 ); /* IE6-9 */
-}
-
-.cornerButton {
-  position:absolute;
-  bottom:0;
-  right:0;
-  background-color:#ccc;
-  color:#fff;
-  font-size:11px;
-  font-weight:normal;
-  cursor:pointer;
-  padding:5px 8px;
-}
-
-.cornerButton:hover {
-  background-color:#bbb;
 }
 
 .close {
