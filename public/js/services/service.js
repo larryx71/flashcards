@@ -23,6 +23,11 @@ App.service.Service = {
     },
 
     deleteCard : function(cardId) {
-        return this._delete('/cards/' + cardId, null);
+        //FIXME:
+        var deferred = $.Deferred();
+        deferred.resolve();
+        return deferred;
+
+//        return this._delete('/cards/' + cardId, null);
     }
 };

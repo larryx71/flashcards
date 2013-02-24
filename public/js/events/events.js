@@ -1,3 +1,4 @@
 App.events = {
-    ON_FILTER_SELECTED : 'onFilterSelected'
+    ON_FILTER_SELECTED : 'onFilterSelected',
+    CARD_DELETED : 'cardDeleted'
 }

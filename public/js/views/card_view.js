@@ -26,6 +26,12 @@ App.views.CardView = Backbone.View.extend({
     },
 
     onDelete : function() {
-        console.log('delete');
+        var self = this;
+
+        console.log('delete, card id = ' + this.model.get('id'));
+        App.service.Service.deleteCard(this.model.get('id'))
+            .done(function() {
+                App.pubsub.publish(App.events.CARD_DELETED, self.$el);
+            });
     }
 });
