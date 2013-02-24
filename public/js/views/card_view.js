@@ -2,7 +2,7 @@ App.views.CardView = Backbone.View.extend({
     className : 'cardContainer',
     tagName : 'div',
 
-    questionTmpl :_.template($('#question-template').html()),
+    questionTmpl :_.template($('#question-template').html() || ''),
 
     events : {
         'click [data-type=view]' : 'onSeeAnswer',
