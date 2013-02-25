@@ -7,6 +7,7 @@ App.views.ListView = Backbone.View.extend({
 
     initialize : function() {
         App.pubsub.subscribe(App.events.ON_FILTER_SELECTED, this.onFilterSelected, this);
+        App.pubsub.subscribe(App.events.CARD_DELETED, this.removeCard, this);
     },
 
     render : function() {
@@ -23,7 +24,6 @@ App.views.ListView = Backbone.View.extend({
             var cardView = new App.views.CardView({model:card});
             var $cardEl = cardView.render().$el;
             self.$el.append($cardEl);
-            console.log($cardEl.find('.question').height());
 
             // Dynamically determine the width and height of the card container,
             // as well as the answer div, we need to do this for the flip animation
@@ -60,5 +60,9 @@ App.views.ListView = Backbone.View.extend({
 
     onFilterSelected : function(selectedFilter) {
         this.filter(selectedFilter);
+    },
+
+    removeCard : function($card) {
+        this.$el.isotope( 'remove', $card );
     }
 });

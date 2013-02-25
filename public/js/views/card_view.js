@@ -2,11 +2,11 @@ App.views.CardView = Backbone.View.extend({
     className : 'cardContainer',
     tagName : 'div',
 
-    questionTmpl :_.template($('#question-template').html()),
+    questionTmpl :_.template($('#question-template').html() || ''),
 
     events : {
-        'click .cornerButton' : 'onSeeAnswer',
-        'click .close' : 'onDelete'
+        'click [data-type=view]' : 'onSeeAnswer',
+        'click [data-type=delete]' : 'onDelete'
     },
 
     initialize : function() {
@@ -26,6 +26,12 @@ App.views.CardView = Backbone.View.extend({
     },
 
     onDelete : function() {
+        var self = this;
 
+        console.log('delete, card id = ' + this.model.get('id'));
+        App.service.Service.deleteCard(this.model.get('id'))
+            .done(function() {
+                App.pubsub.publish(App.events.CARD_DELETED, self.$el);
+            });
     }
 });

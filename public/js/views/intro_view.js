@@ -1,7 +1,7 @@
 App.views.IntroView = Backbone.View.extend({
     el : '#intro',
 
-    intro_template :_.template($('#intro-template').html()),
+    intro_template :_.template($('#intro-template').html() || ''),
 
     events : {
         'click #start_button' : 'onStart'
