@@ -32,18 +32,6 @@ console.log('Node server started, listening on ' + NODE_PORT);
 function onConnectSuccessful(db) {
     console.log('connection successful');
 
-    app.get('/deck/:id', function(req, res) {
-        dbHelper.getList(db, req.params.id)
-            .done(function(list) {
-                res.render('list', {
-                    list : list
-                });
-            })
-            .fail(function(err) {
-                res.send(err);
-            });
-    });
-
     app.get('/card/:id', function(req, res) {
         dbHelper.getList(db, req.params.id)
             .done(function(list) {
