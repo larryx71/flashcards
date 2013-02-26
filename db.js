@@ -4,6 +4,9 @@ var mongo = require('mongodb'),
     Deferred = require('Deferred');
 
 var apis = {
+
+    Collection : {},
+
     connect : function(host, port, database) {
         var deferred = Deferred();
 
@@ -17,7 +20,7 @@ var apis = {
             err ? deferred.reject(err) : deferred.resolve(db);
         });
 
-        var collection = db.createCollection('testing', function(err, collection) {
+        db.createCollection('testing', function(err, collection) {
             console.log('testing collection created')
         });
 
@@ -25,29 +28,56 @@ var apis = {
     },
 
     getCard : function(db, id) {
+        var deferred = Deferred();
 
-        var query = {
-            _id : Number(id)
-        };
+        db.collection('testing', function(err, collection) {
 
-        collection.findOne(query);
+            var query = {
+                _id : id
+            };
+
+            if(!err) {
+                collection.findOne(query, function(err, card) {
+                    if(err || !card) {
+                        deferred.reject('No document found');
+                    }
+                    else {
+                        // Found the document
+                        deferred.resolve(card);
+                    }
+                });
+            }
+            else {
+                deferred.reject('Cannot connect to collection');
+            }
+        });
+
+        return deferred;
     },
 
     createCard : function(db, card) {
         var deferred = Deferred();
 
-        collection.insert(card, {safe:true},
-            function(err, records) {
-                if(!err) { deferred.resolve('Card created');}
-                else {
-                    console.warn(err.message);
-                    deferred.reject('Error creating card');
+        db.collection('testing', function(err, collection) {
 
-                    if (err && err.message.indexOf('E11000 ') !== -1) {
-                        // this _id was already inserted in the database
+            if(!err) {
+
+                collection.insert(card, {safe:true}, function(err, records) {
+                    if(!err) { deferred.resolve(records);}
+                    else {
+                        console.warn(err.message);
+                        deferred.reject('Error creating card');
+
+                        if (err && err.message.indexOf('E11000 ') !== -1) {
+                            // this _id was already inserted in the database
+                        }
                     }
-                }
-            });
+                });
+            }
+            else {
+                deferred.reject('Cannot connect to collection');
+            }
+        });
 
         return deferred;
     },
@@ -55,45 +85,65 @@ var apis = {
     updateCard : function(db, id, card) {
         var deferred = Deferred();
 
-        var query = {
-            _id : Number(id)
-        };
+        db.collection('testing', function(err, collection) {
 
-        collection.update(query, card, {safe:true},
-            function(err, records) {
-                if(!err) { deferred.resolve('Card updated');}
-                else {
-                    console.warn(err.message);
-                    deferred.reject('Error updating card');
+            var query = {
+                _id : id
+            };
 
-                    if (err && err.message.indexOf('E11000 ') !== -1) {
-                        // this _id was already inserted in the database
+            if(!err) {
+
+                collection.findAndModify(query, [['_id','asc']], {$set: card}, {new:true}, function(err, updatedCard) {
+                    if(!err) { deferred.resolve(updatedCard);}
+                    else {
+                        console.warn(err.message);
+                        deferred.reject('Error creating card');
+
+                        if (err && err.message.indexOf('E11000 ') !== -1) {
+                            // this _id was already inserted in the database
+                        }
                     }
-                }
-            });
+                });
+            }
+            else {
+                deferred.reject('Cannot connect to testing collection');
+            }
+        });
 
         return deferred;
     },
 
-    deleteCard : function(db, id, card) {
+    deleteCard : function(db, id) {
         var deferred = Deferred();
 
-        var query = {
-            _id : Number(id)
-        };
+        db.collection('testing', function(err, collection) {
 
-        collection.remove(query, card, {safe:true},
-            function(err, records) {
-                if(!err) { deferred.resolve('Card deleted');}
-                else {
-                    console.warn(err.message);
-                    deferred.reject('Cannot delete card');
+            var query = {
+                _id : id
+            };
 
-                    if (err && err.message.indexOf('E11000 ') !== -1) {
-                        // this _id was already inserted in the database
+            var deleteFlag = {
+                deleted : true
+            }
+
+            if(!err) {
+
+                collection.findAndModify(query, [['_id','asc']], {$set: deleteFlag}, {new:true}, function(err, updatedCard) {
+                    if(!err) { deferred.resolve(updatedCard);}
+                    else {
+                        console.warn(err.message);
+                        deferred.reject('Error deleting card');
+
+                        if (err && err.message.indexOf('E11000 ') !== -1) {
+                            // this _id was already inserted in the database
+                        }
                     }
-                }
-            });
+                });
+            }
+            else {
+                deferred.reject('Cannot connect to testing collection');
+            }
+        });
 
         return deferred;
     },
@@ -128,7 +178,9 @@ var apis = {
         });
 
         return deferred;
-    }
+    },
+
+
 };
 
 // Export the APIs
