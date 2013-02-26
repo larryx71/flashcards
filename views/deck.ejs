@@ -10,8 +10,9 @@
 <body>
     <div id="main">
         <div id="header">
-            Home
-            <div id="filterContainer"></div>
+        </div>
+        <div id="sub_header_div">
+            <div id="sub_header_div_inner"></div>
         </div>
         <!-- hardcoded ui for now, soon to be moved to backbone view -->
         <div id="content">
@@ -23,6 +24,10 @@
         <div id="dialog" class="card">
         </div>
     </div>
+    <script type="text/template" id="header-template">
+        <div class="headerButton boards">Boards</div>
+        <div id="filterContainer"></div>
+    </script>
     <script type="text/template" id="question-template">
         <div class="flipper">
             <div class="question">

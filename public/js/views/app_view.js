@@ -14,6 +14,9 @@ App.views.AppView = Backbone.View.extend({
     },
 
     render : function() {
+        var headerView = new App.views.HeaderView();
+        headerView.render();
+
         var c1 = new App.models.Card();
         c1.set('types', ['javascript']);
         c1.set('question', 'How do you find the intersection of two array?');
