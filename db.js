@@ -18,7 +18,7 @@ var apis = {
             err ? deferred.reject(err) : deferred.resolve(db);
         });
 
-        db.createCollection('testing', function(err, collection) {
+        db.createCollection('cards', function(err, collection) {
             console.log('cards collection created')
         });
 
@@ -28,7 +28,7 @@ var apis = {
     getAllCards : function(db) {
         var deferred = Deferred();
 
-        db.collection('testing', function(err, collection) {
+        db.collection('cards', function(err, collection) {
 
             if(!err) {
                 var cursor = collection.find({}, function(err, card) {
@@ -55,7 +55,7 @@ var apis = {
     getCard : function(db, id) {
         var deferred = Deferred();
 
-        db.collection('testing', function(err, collection) {
+        db.collection('cards', function(err, collection) {
 
             var query = {
                 _id : id
@@ -83,7 +83,7 @@ var apis = {
     createCard : function(db, card) {
         var deferred = Deferred();
 
-        db.collection('testing', function(err, collection) {
+        db.collection('cards', function(err, collection) {
 
             if(!err) {
 
@@ -110,7 +110,7 @@ var apis = {
     updateCard : function(db, id, card) {
         var deferred = Deferred();
 
-        db.collection('testing', function(err, collection) {
+        db.collection('cards', function(err, collection) {
 
             var query = {
                 _id : id
@@ -141,7 +141,7 @@ var apis = {
     deleteCard : function(db, id) {
         var deferred = Deferred();
 
-        db.collection('testing', function(err, collection) {
+        db.collection('cards', function(err, collection) {
 
             var query = {
                 _id : id
