@@ -5,8 +5,6 @@ var mongo = require('mongodb'),
 
 var apis = {
 
-    Collection : {},
-
     connect : function(host, port, database) {
         var deferred = Deferred();
 
@@ -21,7 +19,34 @@ var apis = {
         });
 
         db.createCollection('testing', function(err, collection) {
-            console.log('testing collection created')
+            console.log('cards collection created')
+        });
+
+        return deferred;
+    },
+
+    getAllCards : function(db) {
+        var deferred = Deferred();
+
+        db.collection('testing', function(err, collection) {
+
+            if(!err) {
+                var cursor = collection.find({}, function(err, card) {
+                            if(err || !card) {
+                                deferred.reject('No document found');
+                            }
+                        });
+
+                var cardsList = [];
+                cursor.each(function(item) {
+                    cardsList.push(item);
+                });
+                deferred.resolve(cardsList);
+
+            }
+            else {
+                deferred.reject('Cannot connect to cards collection');
+            }
         });
 
         return deferred;
@@ -48,7 +73,7 @@ var apis = {
                 });
             }
             else {
-                deferred.reject('Cannot connect to collection');
+                deferred.reject('Cannot connect to cards collection');
             }
         });
 
@@ -75,7 +100,7 @@ var apis = {
                 });
             }
             else {
-                deferred.reject('Cannot connect to collection');
+                deferred.reject('Cannot connect to cards collection');
             }
         });
 
@@ -106,7 +131,7 @@ var apis = {
                 });
             }
             else {
-                deferred.reject('Cannot connect to testing collection');
+                deferred.reject('Cannot connect to cards collection');
             }
         });
 
@@ -122,13 +147,9 @@ var apis = {
                 _id : id
             };
 
-            var deleteFlag = {
-                deleted : true
-            }
-
             if(!err) {
 
-                collection.findAndModify(query, [['_id','asc']], {$set: deleteFlag}, {new:true}, function(err, updatedCard) {
+                collection.findAndModify(query, [['_id','asc']], {$set: {'status':'deleted'}}, {new:true}, function(err, updatedCard) {
                     if(!err) { deferred.resolve(updatedCard);}
                     else {
                         console.warn(err.message);
@@ -141,7 +162,7 @@ var apis = {
                 });
             }
             else {
-                deferred.reject('Cannot connect to testing collection');
+                deferred.reject('Cannot connect to cards collection');
             }
         });
 
@@ -173,12 +194,12 @@ var apis = {
                 });
             }
             else {
-                deferred.reject('Cannot connect to collection');
+                deferred.reject('Cannot connect to cards collection');
             }
         });
 
         return deferred;
-    },
+    }
 
 
 };

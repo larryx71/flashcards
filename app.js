@@ -57,14 +57,24 @@ function onConnectSuccessful(db) {
     });
 
 
+    app.get('/cards', function(req, res) {
+        dbHelper.getAllCards(db)
+            .done(function(cardsList) {
+                res.send(cardsList);
+
+            })
+            .fail(function(err) {
+                res.send(err);
+            });
+    });
+
     app.get('/card/:id', function(req, res) {
         dbHelper.getCard(db, req.params.id)
             .done(function(card) {
-console.log(card);
                 //res.render('list', {
                 //    list : list
                 //});
-                res.render('index', {});
+                res.send(card);
 
             })
             .fail(function(err) {
@@ -83,11 +93,12 @@ console.log(card);
         card.owner_id = req.body.owner;
         card.creation_ts = new Date();
         card.last_modified = new Date();
+        card.status = 'active';
 
         dbHelper.createCard(db, card)
          .done(function(card) {
                 console.log('New card created.')
-                res.render('index', {});
+                res.send(card);
             })
          .fail(function(err) {
                 console.log('Failed to create new card')
@@ -110,7 +121,7 @@ console.log(card);
         dbHelper.updateCard(db, id, card)
             .done(function(card) {
                 console.log('Card id:' + req.params.id+ ' updated.');
-                res.render('index', {});
+                res.send(card);
             })
             .fail(function(err) {
                 console.log('Failed to update card')
@@ -123,10 +134,10 @@ console.log(card);
     app.delete('/card/:id', function(req,res) {
         var id = req.params.id;
 
-        dbHelper.updateCard(db, id)
+        dbHelper.deleteCard(db, id)
         .done(function(card) {
             console.log('Card id:' + id + ' deleted.');
-            res.render('index', {});
+            res.send({'status':'ok'});
         })
         .fail(function(err) {
             console.log('Failed to delete card')
