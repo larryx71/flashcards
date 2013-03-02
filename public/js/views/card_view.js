@@ -22,7 +22,10 @@ App.views.CardView = Backbone.View.extend({
 
     onSeeAnswer : function() {
         var answerDialogView = new App.views.AnswerDialogView({model : this.model});
-        answerDialogView.render().show();
+        answerDialogView.render()
+
+        $('body').append(answerDialogView.$el);
+        answerDialogView.show();
     },
 
     onDelete : function() {

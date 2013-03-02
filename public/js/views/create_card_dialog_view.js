@@ -6,7 +6,7 @@ App.views.CreateCardDialogView = Backbone.View.extend({
     template :_.template($('#create-card-dialog-template').html() || ''),
 
     events : {
-        'click .close' : 'onClose',
+        'click .close' : 'hide',
         'click #questionContinueButton' : 'onQuestionEntered'
     },
 
@@ -24,10 +24,6 @@ App.views.CreateCardDialogView = Backbone.View.extend({
 
     hide : function() {
         this.$el.hide().remove();
-    },
-
-    onClose : function() {
-        this.hide();
     },
 
     onQuestionEntered : function() {

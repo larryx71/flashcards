@@ -1,18 +1,20 @@
 App.views.AnswerDialogView = Backbone.View.extend({
-    el : '#dialog_bg',
+    tagName : 'div',
+    id : 'dialog_bg',
 
+    modalTemplate :_.template($('#modal-template').html() || ''),
     template : _.template($('#card-dialog-template').html() || ''),
 
     events : {
-        'click .close' : 'onClose'
+        'click .close' : 'hide'
     },
 
     render : function() {
-        var $dialog = this.$('#dialog');
         var question = this.model.get('question');
         var answer = this.model.get('answer');
 
-        $dialog.html(this.template({question : question, answer : answer}));
+        this.$el.html(this.modalTemplate());
+        this.$('#dialog').html(this.template({question : question, answer : answer}));
 
         return this;
     },
@@ -22,10 +24,6 @@ App.views.AnswerDialogView = Backbone.View.extend({
     },
 
     hide : function() {
-        this.$el.hide();
-    },
-
-    onClose : function() {
-        this.hide();
+        this.$el.hide().remove();
     }
 });
