@@ -1,6 +1,8 @@
 App.views.CreateCardDialogView = Backbone.View.extend({
-    el : '#dialog_bg',
+    tagName : 'div',
+    id : 'dialog_bg',
 
+    modalTemplate :_.template($('#modal-template').html() || ''),
     template :_.template($('#create-card-dialog-template').html() || ''),
 
     events : {
@@ -9,9 +11,9 @@ App.views.CreateCardDialogView = Backbone.View.extend({
     },
 
     render : function() {
-        var $dialog = this.$('#dialog');
+        this.$el.html(this.modalTemplate());
 
-        $dialog.html(this.template());
+        this.$('#dialog').html(this.template());
 
         return this;
     },
@@ -21,7 +23,7 @@ App.views.CreateCardDialogView = Backbone.View.extend({
     },
 
     hide : function() {
-        this.$el.hide();
+        this.$el.hide().remove();
     },
 
     onClose : function() {

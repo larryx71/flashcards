@@ -65,6 +65,9 @@ App.views.HeaderView = Backbone.View.extend({
 
     addCard : function(e) {
         var createCardDialogView = new App.views.CreateCardDialogView();
-        createCardDialogView.render().show();
+        var $modal = createCardDialogView.render();
+
+        $('body').append($modal.$el);
+        $modal.show();
     }
 });
