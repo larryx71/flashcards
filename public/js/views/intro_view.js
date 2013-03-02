@@ -14,6 +14,9 @@ App.views.IntroView = Backbone.View.extend({
     onStart : function() {
         // Show pop up dialog
         var introDialogView = new App.views.IntroDialogView();
-        introDialogView.render().show();
+        introDialogView.render();
+
+        $('body').append(introDialogView.$el);
+        introDialogView.show();
     }
 });

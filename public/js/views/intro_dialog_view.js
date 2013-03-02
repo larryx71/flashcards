@@ -1,5 +1,8 @@
 App.views.IntroDialogView = Backbone.View.extend({
-    el : '#dialog_bg',
+    tagName : 'div',
+    id : 'dialog_bg',
+
+    modalTemplate :_.template($('#modal-template').html() || ''),
 
     events : {
         'click .big_button' : 'onContinue',
@@ -7,7 +10,6 @@ App.views.IntroDialogView = Backbone.View.extend({
     },
 
     render : function() {
-        var $dialog = this.$('#dialog').empty();
         var types = JSON.parse($('#types').val());
         var $types = $('<select />', {
             id : 'interested_types',
@@ -22,7 +24,9 @@ App.views.IntroDialogView = Backbone.View.extend({
             }).text(type).appendTo($types)
         });
 
-        $dialog.append(
+        this.$el.html(this.modalTemplate());
+
+        this.$('#dialog').append(
             $('<p />').text('What technologies are you interested in?')
         ).append($types).append(
             $('<div />', {
@@ -38,19 +42,16 @@ App.views.IntroDialogView = Backbone.View.extend({
             }).text('✕')
         );
 
-        $types.chosen();
-
-
-
         return this;
     },
 
     show : function() {
+        this.$('.chzn-select').chosen();
         this.$el.show();
     },
 
     hide : function() {
-        this.$el.hide();
+        this.$el.hide().remove();
     },
 
     onContinue : function() {
