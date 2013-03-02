@@ -25,7 +25,10 @@
         </div>
     </div>
     <script type="text/template" id="header-template">
-        <div class="headerButton boards">Boards</div>
+        <div class="headerButton decks">Decks</div>
+        <div class="headerButton addCard">
+            + Card
+        </div>
         <div id="filterContainer"></div>
     </script>
     <script type="text/template" id="question-template">
@@ -51,6 +54,35 @@
         </div>
         <div class="a">
             {{ answer }}
+        </div>
+        <div class="close">✕</div>
+    </script>
+    <script type="text/template" id="create-card-dialog-template">
+        <div class="createCardDialogContainer">
+            <div class="createCardDialogInnerContainer">
+                <div class="createCardDialogScreen">
+                    <div class="createCardDialogScreenTitle">
+                        What's your question?
+                    </div>
+                    <div>
+                        <textarea id="createCardDialogQuestion" cols="40" rows="4" />
+                    </div>
+                    <div class="createCardDialogScreenFooter clearFix">
+                        <div id="questionContinueButton" class="big_button" style="float:right;margin-top:0;">Continue</div>
+                    </div>
+                </div>
+                <div class="createCardDialogScreen">
+                    <div class="createCardDialogScreenTitle">
+                        I have an answer.
+                    </div>
+                    <div>
+                        <textarea id="createCardDialogAnswer" cols="40" rows="4"></textarea>
+                    </div>
+                    <div class="createCardDialogScreenFooter clearFix">
+                        <div id="answerContinueButton" class="big_button" style="float:right;margin-top:0;">Continue</div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="close">✕</div>
     </script>

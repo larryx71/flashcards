@@ -4,7 +4,8 @@ App.views.HeaderView = Backbone.View.extend({
     template :_.template($('#header-template').html() || ''),
 
     events : {
-        'click .boards' : 'toggleBoards'
+        'click .decks' : 'toggleDecks',
+        'click .addCard' : 'addCard'
     },
 
     initialize : function() {
@@ -18,11 +19,11 @@ App.views.HeaderView = Backbone.View.extend({
         return this;
     },
 
-    toggleBoards : function() {
+    toggleDecks : function() {
         if(!this.$subHeader.hasClass('on')) {
             this.$subHeaderInner.empty();
 
-            var boards = [
+            var decks = [
                 {
                     name : 'Clientside',
                     id : 1
@@ -37,14 +38,14 @@ App.views.HeaderView = Backbone.View.extend({
                 }
             ];
 
-            for(var i = 0; i < boards.length; i++) {
-                var board = boards[i];
+            for(var i = 0; i < decks.length; i++) {
+                var deck = decks[i];
 
                 $('<div />', {
-                    'class' : 'sub_header_board_container'
+                    'class' : 'sub_header_decks_container'
                 })
-                    .data('id', board.id)
-                    .text(board.name)
+                    .data('id', decks.id)
+                    .text(deck.name)
                     .appendTo(this.$subHeaderInner);
             }
 
@@ -59,6 +60,11 @@ App.views.HeaderView = Backbone.View.extend({
         }
 
         this.$subHeader.toggleClass('on');
-        this.$('.boards').toggleClass('on');
+        this.$('.decks').toggleClass('on');
+    },
+
+    addCard : function(e) {
+        var createCardDialogView = new App.views.CreateCardDialogView();
+        createCardDialogView.render().show();
     }
 });

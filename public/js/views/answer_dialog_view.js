@@ -1,7 +1,7 @@
 App.views.AnswerDialogView = Backbone.View.extend({
     el : '#dialog_bg',
 
-    template :_.template($('#card-dialog-template').html() || ''),
+    template : _.template($('#card-dialog-template').html() || ''),
 
     events : {
         'click .close' : 'onClose'
