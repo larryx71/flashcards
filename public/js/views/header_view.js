@@ -16,6 +16,13 @@ App.views.HeaderView = Backbone.View.extend({
     render : function() {
         this.$el.html(this.template());
 
+        // Only show the options that the user has access to
+        if(!App.session.email) {
+            // User is not logged in, hide some buttons
+            this.$('.decks').hide();
+            this.$('.addCard').hide();
+        }
+
         return this;
     },
 

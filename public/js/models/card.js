@@ -1,9 +1,11 @@
 App.models.Card = Backbone.Model.extend({
     defaults : {
-        id : '',
+        _id : '',
         types : [],
         question : '',
         answer : '',
-        owner : ''
+        owner_id : '',
+        userid : '',
+        status : ''
     }
 });

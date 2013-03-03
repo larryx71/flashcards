@@ -29,5 +29,9 @@ App.service.Service = {
         return deferred;
 
 //        return this._delete('/cards/' + cardId, null);
+    },
+
+    addCard : function(card) {
+        return this._post('/card', card);
     }
 };

@@ -1,4 +1,7 @@
 $(function() {
+    //FIXME: assume this user is logged
+    App.session.email = 'test@gmail.com';
+
     switch(viewState) {
         case 'home':
             var homeView = new App.views.HomeView();

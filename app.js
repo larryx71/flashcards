@@ -84,12 +84,13 @@ function onConnectSuccessful(db) {
 
     app.post('/card', function(req,res) {
         var card = {};
-        card._id = req.body.id;
+//        card._id = req.body.id;
+        card._id = (new Date()).getTime();
         card.userid = req.body.userid;
         card.question = req.body.question;
         card.answer = req.body.answer;
         card.is_public = false;
-        card.difficuly = req.body.difficulty;
+        card.difficulty = req.body.difficulty;
         card.owner_id = req.body.owner;
         card.creation_ts = new Date();
         card.last_modified = new Date();

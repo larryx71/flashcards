@@ -193,7 +193,8 @@ body {
   width:360px;
   height:160px;
   padding:20px;
-  display:inline-block;
+  float:left;
+  position:relative;
 }
 
 .createCardDialogScreenTitle {
@@ -204,9 +205,10 @@ body {
 }
 
 .createCardDialogScreenFooter {
-  position:relative;
-  margin-top:6px;
-  padding:10px;
+  bottom: 0;
+  margin-top: 6px;
+  position: absolute;
+  right: 10px;
 }
 
 #content {
@@ -444,4 +446,9 @@ input, textarea {
   width:0;
   height:0;
   clear:both;
+}
+
+.error {
+  border: 5px solid #F2DEDE;
+  box-shadow: 0 0 2px #B94A48 inset;
 }
