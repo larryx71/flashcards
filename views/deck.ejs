@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet/less" type="text/css" href="/css/styles.less" />
     <script src='/js/thirdparty/less-1.3.3.min.js'></script>
     <link rel="stylesheet" href="/css/isotope.css"></link>
@@ -50,10 +51,12 @@
     </script>
     <script type="text/template" id="card-dialog-template">
         <div class="q">
-            {{ question }}
+            <div>{{ question }}</div>
+            <textarea class="editQuestion" cols="55" rows="1">{{ question }}</textarea>
         </div>
         <div class="a">
-            {{ answer }}
+            <div>{{ question }}</div>
+            <textarea class="editAnswer" cols="55" rows="1">{{ answer }}</textarea>
         </div>
         <div class="close">✕</div>
     </script>
@@ -65,7 +68,7 @@
                         What's your question?
                     </div>
                     <div>
-                        <textarea id="createCardDialogQuestion" cols="40" rows="4" />
+                        <textarea id="createCardDialogQuestion" cols="48" rows="3" />
                     </div>
                     <div class="createCardDialogScreenFooter clearFix">
                         <div id="questionContinueButton" class="big_button" style="float:right;margin-top:0;">Continue</div>
@@ -76,7 +79,7 @@
                         I have an answer.
                     </div>
                     <div>
-                        <textarea id="createCardDialogAnswer" cols="40" rows="4"></textarea>
+                        <textarea id="createCardDialogAnswer" cols="48" rows="3"></textarea>
                     </div>
                     <div class="createCardDialogScreenFooter clearFix">
                         <div id="answerContinueButton" class="big_button" style="float:right;margin-top:0;">Continue</div>

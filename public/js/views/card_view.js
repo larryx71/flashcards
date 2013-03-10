@@ -10,6 +10,7 @@ App.views.CardView = Backbone.View.extend({
     },
 
     initialize : function() {
+        this.model.on('change', this.onModelChanged, this);
     },
 
     render : function() {
@@ -18,6 +19,11 @@ App.views.CardView = Backbone.View.extend({
         this.$el.data('answer', this.model.get('answer'));
 
         return this;
+    },
+
+    onModelChanged : function() {
+        console.log("model changed!");
+        this.render();
     },
 
     onSeeAnswer : function() {

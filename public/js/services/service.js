@@ -7,6 +7,10 @@ App.service.Service = {
         return this._send('POST', cmd, data);
     },
 
+    _put : function(cmd, data) {
+        return this._send('PUT', cmd, data);
+    },
+
     _delete : function(cmd, data) {
         return this._send('DELETE', cmd, data);
     },
@@ -33,5 +37,14 @@ App.service.Service = {
 
     addCard : function(card) {
         return this._post('/card', card);
+    },
+
+    editCard : function(card, id) {
+        //FIXME:
+        var deferred = $.Deferred();
+        deferred.resolve();
+        return deferred;
+
+//        return this._put('/card/' + id, card);
     }
 };
