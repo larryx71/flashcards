@@ -23,51 +23,13 @@ App.views.HeaderView = Backbone.View.extend({
             this.$('.addCard').hide();
         }
 
+        this.subHeaderView = new App.views.SubHeaderView();
+
         return this;
     },
 
     toggleDecks : function() {
-        if(!this.$subHeader.hasClass('on')) {
-            this.$subHeaderInner.empty();
-
-            var decks = [
-                {
-                    name : 'Clientside',
-                    id : 1
-                },
-                {
-                    name : 'Serverside',
-                    id : 2
-                },
-                {
-                    name : 'Algorithm',
-                    id : 3
-                }
-            ];
-
-            for(var i = 0; i < decks.length; i++) {
-                var deck = decks[i];
-
-                $('<div />', {
-                    'class' : 'sub_header_decks_container'
-                })
-                    .data('id', decks.id)
-                    .text(deck.name)
-                    .appendTo(this.$subHeaderInner);
-            }
-
-            this.$subHeader.animate({
-                height : '90'
-            }, 180);
-        }
-        else {
-            this.$subHeader.animate({
-                height : '0'
-            }, 180);
-        }
-
-        this.$subHeader.toggleClass('on');
-        this.$('.decks').toggleClass('on');
+        this.subHeaderView.toggle();
     },
 
     addCard : function(e) {

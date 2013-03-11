@@ -5,8 +5,9 @@ App.views.CardView = Backbone.View.extend({
     questionTmpl :_.template($('#question-template').html() || ''),
 
     events : {
-        'click [data-type=view]' : 'onSeeAnswer',
-        'click [data-type=delete]' : 'onDelete'
+        'click [data-type=view]' : 'onView',
+        'click [data-type=delete]' : 'onDelete',
+        'click [data-type=edit]' : 'onEdit'
     },
 
     initialize : function() {
@@ -18,15 +19,30 @@ App.views.CardView = Backbone.View.extend({
         this.$el.addClass('all ' + this.model.get('types').join(' '));
         this.$el.data('answer', this.model.get('answer'));
 
+//        if(!App.session.email || this.model.get('owner_id') != App.session.email) {
+//            // user is not logged in or this user is not the owner of this card
+//            // hide the edit button
+//            this.$('[data-type=edit]').hide();
+//        }
+
         return this;
     },
 
     onModelChanged : function() {
         console.log("model changed!");
         this.render();
+        App.pubsub.publish(App.events.CARD_UPDATED);
     },
 
-    onSeeAnswer : function() {
+    onEdit : function() {
+        var answerDialogView = new App.views.AnswerDialogView({model : this.model});
+        answerDialogView.render()
+
+        $('body').append(answerDialogView.$el);
+        answerDialogView.showAdminView();
+    },
+
+    onView : function() {
         var answerDialogView = new App.views.AnswerDialogView({model : this.model});
         answerDialogView.render()
 

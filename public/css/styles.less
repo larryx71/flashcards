@@ -43,6 +43,7 @@ body {
   background-color:#2693BA;
 }
 
+/* Sub Header */
 #sub_header_div {
   width:100%;
   height:0;
@@ -68,6 +69,37 @@ body {
   padding: 10px;
   text-align: center;
   width: 100px;
+  position:relative;
+}
+
+.hiddenDeckMenu {
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  text-align: center;
+  background-color:#fff;
+  border-style:solid;
+  border-color:#eee;
+  border-width:1px 0 0 0;
+  display:none;
+}
+
+.sub_header_decks_container:hover .hiddenDeckMenu{
+  display:block;
+}
+
+.deckOption {
+  padding:7px 10px;
+  color:#999;
+  font-size:11px;
+  cursor:pointer;
+  display:inline-block;
+}
+
+.deckOption:hover {
+  background:#f3f3f3;
+  color:#555;
 }
 
 #intro {
@@ -175,7 +207,7 @@ body {
   margin-bottom:15px;
 }
 
-#answer_dialog_footer {
+#dialog_footer {
   padding:8px 0;
 }
 
@@ -239,28 +271,9 @@ body {
 }
 
 .cardContainer {
-  -moz-perspective: 1000px;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
   float:left;
   margin:0 10px 10px 0;
-}
-
-.cardContainer:hover .flipper {
-  -moz-transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
-}
-
-/* flip speed goes here */
-.flipper {
-  -webkit-transition: 0.6s;
-  -webkit-transform-style: preserve-3d;
-  -moz-transition: 0.6s;
-  -moz-transform-style: preserve-3d;
-  transition: 0.6s;
-  transform-style: preserve-3d;
-  position: relative;
+  position:relative;
 }
 
 .question {
@@ -271,65 +284,7 @@ body {
   font-size: 13px;
   font-weight: 400;
   width:300px;
-  position:absolute;
-  top:0;
-  left:0;
   padding-bottom:20px;
-  z-index:4;
-  -moz-backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.answer {
-  background-color: #2AA4CF;
-  border: 1px solid #E5E5E5;
-  box-shadow: 0 1px 4px #DDDDDD;
-  color: #666666;
-  font-size: 15px;
-  font-weight: 400;
-  height:100%;
-  width:300px;
-  position:absolute;
-  top:0;
-  left:0;
-  z-index:3;
-  padding-bottom:20px;
-  transform: rotateY(180deg);
-  -moz-backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -moz-transform: rotateY(180deg) translate(-20px, 0px);
-  -webkit-transform: rotateY(180deg) translate(-20px, 0px);
-  transform: rotateY(180deg) translate(-20px, 0px);
-}
-
-.answerInner {
-  width:calc(~"100% - 20px");
-  height:calc(~"100% - 20px");
-  padding:10px;
-  text-align:center;
-  color:#fff;
-}
-
-.answerInner .title {
-  font-size:16px;
-  margin-top:15px;
-}
-
-.answerInner .choice {
-  display:inline-block;
-  cursor:pointer;
-  background-color: #0089B7;
-  border: 1px solid #005FA8;
-  padding:6px 8px;
-  font-size:14px;
-  margin:10px 8px;
-  color:#fff;
-}
-
-.answerInner .choice:hover {
-  background-color:#111;
 }
 
 .question .icon {
@@ -346,12 +301,45 @@ body {
   padding: 20px;
 }
 
-.answer .text {
-  border-radius:5px 5px 0 0;
-  line-height: 20px;
-  min-height: 50px;
-  padding: 20px;
-  background-color:#c66351; /*#dfb780;*/
+pre {
+  font-family:inherit;
+  font-size:12px;
+  color:#555;
+  margin:0;
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.cardHiddenMenu {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  text-align: center;
+  background-color:#fff;
+  border-style:solid;
+  border-color:#eee;
+  border-width:1px 0 0 0;
+  display:none;
+}
+
+.cardContainer:hover .cardHiddenMenu{
+  display:block;
+}
+
+.cardOption {
+  padding:7px 10px;
+  color:#999;
+  font-size:11px;
+  cursor:pointer;
+  display:inline-block;
+}
+
+.cardOption:hover {
+  background:#f3f3f3;
+  color:#555;
 }
 
 .q .editQuestion, .a .editAnswer {
@@ -435,6 +423,22 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#555', endColorstr='#444',GradientType=0 ); /* IE6-9 */
 }
 
+/* Modal */
+.modalRow {
+  margin-bottom:10px;
+}
+
+.modalRowKey {
+  display: inline-block;
+  padding-top: 8px;
+  vertical-align: top;
+  width: 80px;
+}
+
+.modalRowValue {
+  display:inline-block;
+}
+
 .close {
   color: #ddd;
   font-size: 14px;
@@ -457,6 +461,7 @@ input, textarea {
   line-height:18px;
   font-family:inherit;
   font-size:12px;
+  resize:vertical;
 }
 
 .clearFix:after {

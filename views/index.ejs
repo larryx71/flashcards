@@ -40,19 +40,14 @@
     </div>
 </script>
 <script type="text/template" id="question-template">
-    <div class="flipper">
-        <div class="question">
-            <i class="icon-question-sign icon"></i>
-            <div class="text">
-                {{ question }}
-            </div>
+    <div class="question">
+        <i class="icon-question-sign icon"></i>
+        <div class="text">
+            <pre>{{ question }}</pre>
         </div>
-        <div class="answer">
-            <div class="answerInner">
-                <div class="title">What would you like to do?</div>
-                <div class="choice" data-type="view">View</div>
-            </div>
-        </div>
+    </div>
+    <div class="cardHiddenMenu">
+        <div class="cardOption" data-type="view">View</div>
     </div>
 </script>
 <script type="text/template" id="card-dialog-template">

@@ -32,30 +32,52 @@
         </div>
         <div id="filterContainer"></div>
     </script>
+    <script type="text/template" id="deck-menu-template">
+        <div class="hiddenDeckMenu">
+            <div class="deckOption" data-type="view">View</div>
+            <div class="deckOption" data-type="edit">Edit</div>
+        </div>
+    </script>
     <script type="text/template" id="question-template">
-        <div class="flipper">
-            <div class="question">
-                <i class="icon-question-sign icon"></i>
-                <div class="text">
-                    {{ question }}
-                </div>
-            </div>
-            <div class="answer">
-                <div class="answerInner">
-                    <div class="title">What would you like to do?</div>
-                    <div class="choice" data-type="delete">Delete</div>
-                    <div class="choice" data-type="view">View</div>
-                </div>
+        <div class="question">
+            <i class="icon-question-sign icon"></i>
+            <div class="text">
+                <pre>{{ question }}</pre>
             </div>
         </div>
+        <div class="cardHiddenMenu">
+            <div class="cardOption" data-type="view">View</div>
+            <div class="cardOption" data-type="edit">Edit</div>
+            <div class="cardOption" data-type="delete">Delete</div>
+        </div>
+    </script>
+    <script type="text/template" id="edit-deck-dialog-template">
+        <div class="close">✕</div>
+        <div class="modalRow">
+            <div class="modalRowKey">
+                Name
+            </div>
+            <div class="modalRowValue">
+                <input id="editDeckName" width="200" value="{{ name }}" />
+            </div>
+        </div>
+        <div class="modalRow">
+            <div class="modalRowKey">
+                Description
+            </div>
+            <div class="modalRowValue">
+                <textarea id="editDeckDescription" rows="3" cols="40">{{ description }}</textarea>
+            </div>
+        </div>
+        <div id="dialog_footer" class="clearFix"><div class="big_button saveButton" style="margin-top: 15px; float: right;">Save</div></div>
     </script>
     <script type="text/template" id="card-dialog-template">
         <div class="q">
-            <div>{{ question }}</div>
+            <div><pre>{{ question }}</pre></div>
             <textarea class="editQuestion" cols="55" rows="1">{{ question }}</textarea>
         </div>
         <div class="a">
-            <div>{{ question }}</div>
+            <div><pre>{{ answer }}</pre></div>
             <textarea class="editAnswer" cols="55" rows="1">{{ answer }}</textarea>
         </div>
         <div class="close">✕</div>

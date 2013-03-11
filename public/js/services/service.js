@@ -27,24 +27,40 @@ App.service.Service = {
     },
 
     deleteCard : function(cardId) {
-        //FIXME:
-        var deferred = $.Deferred();
-        deferred.resolve();
-        return deferred;
+        //TODO: we should indicate from which deck the card is deleted
+        return this._returnResolvedDeferredObj();
 
 //        return this._delete('/cards/' + cardId, null);
     },
 
     addCard : function(card) {
+        //TODO: we should indicate to which deck the card is added
         return this._post('/card', card);
+    },
+
+    deleteDeck : function(deckId) {
+        //FIXME:
+        return this._returnResolvedDeferredObj();
+
+//        return this._delete('/deck/' + deckId, null);
+    },
+
+    editDeck : function(deckId, deck) {
+        return this._returnResolvedDeferredObj();
+
+//        return this._put('/deck/' + deckId, deck);
     },
 
     editCard : function(card, id) {
         //FIXME:
+        return this._returnResolvedDeferredObj();
+
+//        return this._put('/card/' + id, card);
+    },
+
+    _returnResolvedDeferredObj : function() {
         var deferred = $.Deferred();
         deferred.resolve();
         return deferred;
-
-//        return this._put('/card/' + id, card);
     }
 };

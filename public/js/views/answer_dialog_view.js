@@ -21,18 +21,18 @@ App.views.AnswerDialogView = Backbone.View.extend({
     },
 
     renderAdminUI : function() {
-        var q = this.$('.q > div'),
-            a = this.$('.a > div'),
+        var q = this.$('.q pre'),
+            a = this.$('.a pre'),
             questionHeight = q.height(),
             answerHeight = a.height();
 
         q.hide();
         a.hide();
-        this.$('.editQuestion').attr('rows', Math.ceil(questionHeight / 18)).show();
-        this.$('.editAnswer').attr('rows', Math.ceil(answerHeight / 18)).show();
+        this.$('.editQuestion').attr('rows', Math.ceil(questionHeight / 18) + 2).show();
+        this.$('.editAnswer').attr('rows', Math.ceil(answerHeight / 18) + 2).show();
 
         $('<div />', {
-            'id' : 'answer_dialog_footer',
+            'id' : 'dialog_footer',
             'class' : 'clearFix'
         }).append(
             $('<div />', {
@@ -50,10 +50,13 @@ App.views.AnswerDialogView = Backbone.View.extend({
         var answer = $('.editAnswer').val();
 
         if(question && answer) {
-            this.model.set('question', question);
-            this.model.set('answer', answer);
+            var newModelJSON = this.model.toJSON();
+            newModelJSON['question'] = question;
+            newModelJSON['answer'] = answer;
 
-            App.service.Service.editCard(this.model.toJSON(), this.model.get('_id')).done(function() {
+            App.service.Service.editCard(newModelJSON, this.model.get('_id')).done(function() {
+                self.model.set(newModelJSON);
+
                 self.hide();
             }).fail(function(err) {
                 alert(err);
@@ -62,10 +65,9 @@ App.views.AnswerDialogView = Backbone.View.extend({
         else {
             alert('you must enter a valid question and answer');
         }
-        this.model.set('question', this.$('.editQuestion'))
     },
 
-    show : function() {
+    showAdminView : function() {
         this.$el.show();
 
         this.renderAdminUI();
@@ -75,6 +77,10 @@ App.views.AnswerDialogView = Backbone.View.extend({
 
             }
         }
+    },
+
+    show : function() {
+        this.$el.show();
     },
 
     hide : function() {
