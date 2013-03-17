@@ -38,6 +38,14 @@ App.service.Service = {
         return this._post('/card', card);
     },
 
+    addDeck : function(deck) {
+        //NOTE: this should return an id of the newly created deck
+        //TODO:
+        return this._returnResolvedDeferredObj();
+
+//        return this._post('/deck', deck);
+    },
+
     deleteDeck : function(deckId) {
         //FIXME:
         return this._returnResolvedDeferredObj();

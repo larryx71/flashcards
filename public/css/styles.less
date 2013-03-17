@@ -20,7 +20,7 @@ body {
   color:#fff;
   height:3em;
   font-size:12px;
-  padding:0 50px;
+  padding:0 15px;
   box-shadow:0 2px 2px #bbb;
   top:0;
   font-weight:400;
@@ -30,7 +30,7 @@ body {
 
 .headerButton {
   cursor: pointer;
-  display: inline-block;
+  float:right;
   line-height: 26px;
   padding: 5px 8px;
 }
@@ -41,6 +41,10 @@ body {
 
 .headerButton.on {
   background-color:#2693BA;
+}
+
+.saveAndCreateAccount {
+  color:rgba(255, 255, 255, .7);
 }
 
 /* Sub Header */
@@ -70,6 +74,25 @@ body {
   text-align: center;
   width: 100px;
   position:relative;
+  vertical-align:top;
+}
+
+.sub_header_create_deck_container {
+  background-color: #fcfcfc;
+  border:1px dotted #DDDDDD;
+  color:#ccc;
+  cursor:pointer;
+  display:inline-block;
+  vertical-align:top;
+  font-size:14px;
+  height:40px;
+  margin: 15px 0 15px 15px;
+  padding: 10px;
+  text-align: center;
+  width: 100px;
+  position:relative;
+  font-weight:bold;
+  box-shadow: 0 2px 3px #E7E7E7;
 }
 
 .hiddenDeckMenu {
@@ -263,10 +286,8 @@ body {
 }
 
 #filterContainer {
-  display:inline-block;
-  position:absolute;
-  right:50px;
-  top:5px;
+  float:left;
+  margin-top:5px;
   color:#555;
 }
 
@@ -461,6 +482,10 @@ input, textarea {
   line-height:18px;
   font-family:inherit;
   font-size:12px;
+  resize:none;
+}
+
+.resize {
   resize:vertical;
 }
 

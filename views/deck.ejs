@@ -26,6 +26,7 @@
         <div id="dialog" class="card"></div>
     </script>
     <script type="text/template" id="header-template">
+        <div class="headerButton saveAndCreateAccount">Save & Create Account</div>
         <div class="headerButton decks">Decks</div>
         <div class="headerButton addCard">
             + Card
@@ -69,16 +70,16 @@
                 <textarea id="editDeckDescription" rows="3" cols="40">{{ description }}</textarea>
             </div>
         </div>
-        <div id="dialog_footer" class="clearFix"><div class="big_button saveButton" style="margin-top: 15px; float: right;">Save</div></div>
+        <div id="dialog_footer" class="clearFix"><div class="big_button {{ buttonName }}" style="margin-top: 15px; float: right;">{{ buttonName }}</div></div>
     </script>
     <script type="text/template" id="card-dialog-template">
         <div class="q">
             <div><pre>{{ question }}</pre></div>
-            <textarea class="editQuestion" cols="55" rows="1">{{ question }}</textarea>
+            <textarea class="editQuestion resize" cols="55" rows="1">{{ question }}</textarea>
         </div>
         <div class="a">
             <div><pre>{{ answer }}</pre></div>
-            <textarea class="editAnswer" cols="55" rows="1">{{ answer }}</textarea>
+            <textarea class="editAnswer resize" cols="55" rows="1">{{ answer }}</textarea>
         </div>
         <div class="close">✕</div>
     </script>

@@ -1,6 +1,6 @@
 App.models.Deck = Backbone.Model.extend({
     defaults : {
-        id : '',
+        id : 0,
         name : '',
         description : '',
         cards : []

@@ -5,7 +5,8 @@ App.views.HeaderView = Backbone.View.extend({
 
     events : {
         'click .decks' : 'toggleDecks',
-        'click .addCard' : 'addCard'
+        'click .addCard' : 'addCard',
+        'click .saveAndCreateAccount' : 'saveAndCreateAnAccount'
     },
 
     initialize : function() {
@@ -38,5 +39,9 @@ App.views.HeaderView = Backbone.View.extend({
 
         $('body').append(createCardDialogView.$el);
         createCardDialogView.show();
+    },
+
+    saveAndCreateAnAccount : function() {
+
     }
 });
